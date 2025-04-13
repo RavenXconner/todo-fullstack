@@ -1,107 +1,250 @@
-# ToDoList-FastAPI
+backend/README.md
+# 🧠 FastAPI Backend – Full-Stack To-Do List App
 
-## Backend (FastAPI) Setup
+This is the FastAPI backend for the full-stack To-Do List application. It provides a RESTful API with full CRUD operations, task filtering, and integration with a PostgreSQL database.
 
-### Prerequisites
-- Python 3.7+
-- pip package manager
+## 🚀 Getting Started
 
-### Installation
-1. Navigate to the `fastapi-app` directory:
-   ```bash
-   cd fastapi-app
-   ```
+### 🔧 Setup Instructions
 
-2. Create and activate a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use: venv\Scripts\activate
-   ```
+1. **Clone this repo and enter the backend folder**
+   
+cd backend
 
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+Create a virtual environment and activate it
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-### Database Setup
-1. The application uses SQLite by default (configured in `database.py`).
-2. To initialize the database, run:
-   ```bash
-   python main.py
-   ```
-   This will create the database file and tables.
+Install dependencies
 
-### Running the Backend
-Start the FastAPI development server:
-```bash
+ 
+  
+  
+pip install -r requirements.txt
+Create a .env file with your database URL
+
+php-template
+  
+  
+DATABASE_URL=postgresql://<user>:<password>@<host>/<dbname>
+Run the app
+
+ 
+  
+  
 uvicorn main:app --reload
-```
+Access your API docs
 
-The API will be available at:
-- http://localhost:8000
-- Interactive docs at http://localhost:8000/docs
+Swagger: http://localhost:8000/docs
 
-## Frontend (React) Setup
+Redoc: http://localhost:8000/redoc
 
-### Prerequisites
-- Node.js 16+
-- npm or yarn
+📐 API Endpoints
+Base URL: https://todo-fullstack-wvsi.onrender.com/api/todos/
 
-### Installation
-1. Navigate to the `todo-app` directory:
-   ```bash
-   cd todo-app
-   ```
+Method	Endpoint	Description
+GET	/	Get all todos
+GET	/{id}	Get single todo by ID
+POST	/	Create a new todo
+PUT	/{id}	Update a todo
+DELETE	/{id}	Delete a todo
+GET	/filter/{status}	Filter todos by status
+Request/Response formats are included in the main README.md.
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+📦 Project Structure
+pgsql
+  
+  
+backend/
+├── main.py
+├── models.py
+├── schemas.py
+├── crud.py
+├── database.py
+├── config.py
+└── .env
+⚙️ Deployment
+This app is deployed on Render.
 
-### Running the Frontend
-Start the development server:
-```bash
+Make sure to:
+
+Add environment variables on Render
+
+Use a render.yaml file if needed
+
+🛡️ CORS Configuration
+If calling this API from React frontend, make sure you’ve enabled CORS:
+
+python
+  
+  
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+🧑‍💻 Author
+Javy Rodillon
+
+yaml
+  
+  
+
+---
+
+### 📁 `frontend/README.md`
+  markdown
+# 🌐 React Frontend – Full-Stack To-Do List App
+
+This is the React frontend of the To-Do List web app built with Vite and Tailwind CSS. It interacts with the FastAPI backend to manage tasks.
+
+## 🚀 Getting Started
+
+### 🔧 Setup Instructions
+
+1. **Navigate to the frontend folder**
+   
+cd frontend
+Install dependencies
+
+ 
+  
+  
+npm install
+Run the dev server
+
+ 
+  
+  
 npm run dev
-```
+App runs at: http://localhost:5173
 
-The application will be available at:
-- http://localhost:5173
+🧠 Features
+✅ Create, Read, Update, Delete tasks
 
-### Building for Production
-To create a production build:
-```bash
-npm run build
-```
+🗂️ Filter tasks by: All / Completed / Pending
 
-To preview the production build:
-```bash
-npm run preview
-```
+🌗 Toggle between Dark and Light Mode
 
-## Connecting Frontend to Backend
-The frontend is pre-configured to connect to the backend API. By default it expects:
-- Backend running on http://localhost:8000
-- API endpoints under `/api/tasks/`
+⚡ Full integration with FastAPI backend
 
-## Deployment
-For production deployment, consider:
-1. Using a production-grade ASGI server like Uvicorn with Gunicorn for the backend
-2. Configuring environment variables for database connections
-3. Setting up proper CORS configuration for the API
-4. Using a reverse proxy like Nginx
+🖥️ Responsive UI with Tailwind CSS
 
-## Troubleshooting
-- If the frontend can't connect to the backend, check:
-  - Both servers are running
-  - No CORS errors in browser console
-  - Correct API URL in `src/TodoList.jsx`
-- For database issues, verify:
-  - SQLite file permissions
-  - Database tables are created
+⚙️ API Connection
+All API requests are sent to:
 
-## List of API ENDPOINTS
--GET /api/tasks/
--GET /api/tasks/{task_id}
--POST /api/tasks/
--PUT /api/tasks/{task_id}
--DELETE /api/tasks/{task_id}
+js
+  
+  
+const API_BASE_URL = 'https://your-backend.onrender.com/api/todos/';
+Make sure this matches your deployed backend.
+
+🌓 Dark Mode
+Dark mode is handled via a toggle button. Preferences are stored in local storage.
+
+🔐 Optional Auth Integration
+If backend token auth is enabled, attach the token in headers:
+
+js
+  
+  
+headers: {
+  Authorization: `Token ${userToken}`,
+}
+🧑‍💻 Author
+Javy Rodillon
+
+yaml
+  
+  
+
+---
+
+## 📄 `ToDoApp_Report.md`
+
+Here's the **draft** in Markdown. I’ll generate a downloadable PDF next.
+
+  markdown
+# 📊 Project Report – Full-Stack To-Do List App
+
+## 👨‍💻 Developer: Javy Rodillon
+
+---
+
+## ✅ Project Overview
+
+This project demonstrates a full-stack web application built with **React** (frontend) and **FastAPI** (backend), providing a responsive and functional To-Do List manager.
+
+---
+
+## ⚙️ Tech Stack
+
+| Layer     | Technology     |
+|-----------|----------------|
+| Frontend  | React, Vite, Tailwind |
+| Backend   | FastAPI, SQLAlchemy, PostgreSQL |
+| Hosting   | Netlify (frontend), Render (backend) |
+
+---
+
+## 🧪 Key Features
+
+- Create, Read, Update, Delete To-Do items
+- Filter tasks: All / Completed / Pending
+- Dark/Light mode toggle
+- FastAPI Swagger UI integration
+- Deployed live frontend and backend
+
+---
+
+## 🆚 FastAPI vs Django REST Framework (DRF)
+
+| Feature              | Django REST Framework | FastAPI                    |
+|----------------------|-----------------------|----------------------------|
+| Performance          | Synchronous, slower   | Asynchronous, fast         |
+| Documentation        | Manual or Spectacular | Auto Swagger + Redoc       |
+| Syntax               | Class-based           | Function-based, modern     |
+| Learning Curve       | Higher                | Easier                     |
+| Community Support    | Mature, large         | Newer, growing rapidly     |
+
+**Why FastAPI?**  
+For this app, FastAPI provided quick development, automatic documentation, async performance, and ease of use — perfect for this type of CRUD-focused API.
+
+---
+
+## 🔧 Challenges & Solutions
+
+| Challenge                          | Solution                                           |
+|-----------------------------------|----------------------------------------------------|
+| React → FastAPI CORS errors       | Added CORS middleware in FastAPI                  |
+| API response delays on Render     | Optimized DB queries and added loading indicators |
+| Styling toggle dark/light mode    | Used Tailwind + localStorage for persistence      |
+| SQLite limits on deployment       | Switched to PostgreSQL for Render compatibility   |
+
+---
+
+## 🌐 Deployment
+
+| Component | Platform | URL                                  |
+|-----------|----------|--------------------------------------|
+| Frontend  | Netlify  | `https://your-frontend.netlify.app`  |
+| Backend   | Render   | `https://your-backend.onrender.com`  |
+
+---
+
+## 📁 GitHub Repositories
+
+- [Frontend Repo](https://github.com/your-username/fullstack-todo-frontend)
+- [Backend Repo](https://github.com/your-username/fullstack-todo-backend)
+
+---
+
+## 🎯 Learnings
+
+- Improved async handling and REST API integration
+- Practical deployment experience on Render and Netlify
+- Better understanding of how to build maintainable modular code
